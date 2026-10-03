@@ -1,0 +1,63 @@
+{
+  "user": "000db80e6a62631f5c98",
+  "treino": [
+    {
+      "id": "4000",
+      "titulo": "Garry's Mod"
+    },
+    {
+      "id": "24010",
+      "titulo": "Train Simulator"
+    },
+    {
+      "id": "232430",
+      "titulo": "Gone Home"
+    }
+  ],
+  "alvo_teste": {
+    "id": "348380",
+    "titulo": "The Interview"
+  },
+  "top10": [
+    {
+      "id": "440",
+      "titulo": "Team Fortress 2"
+    },
+    {
+      "id": "730",
+      "titulo": "Counter-Strike: Global Offensive"
+    },
+    {
+      "id": "550",
+      "titulo": "Left 4 Dead 2"
+    },
+    {
+      "id": "304930",
+      "titulo": "Unturned"
+    },
+    {
+      "id": "252490",
+      "titulo": "Rust"
+    },
+    {
+      "id": "218620",
+      "titulo": "PAYDAY 2"
+    },
+    {
+      "id": "105600",
+      "titulo": "Terraria"
+    },
+    {
+      "id": "49520",
+      "titulo": "Borderlands 2"
+    },
+    {
+      "id": "265930",
+      "titulo": "Goat Simulator"
+    },
+    {
+      "id": "620",
+      "titulo": "Portal 2"
+    }
+  ]
+}

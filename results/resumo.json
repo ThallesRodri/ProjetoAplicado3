@@ -1,0 +1,62 @@
+{
+  "raw_reviews": 59305,
+  "raw_users": 25458,
+  "raw_items": 3682,
+  "duplicate_pairs": 874,
+  "conflicting_pairs": 0,
+  "missing": {
+    "user": 0,
+    "item": 0,
+    "positive": 0
+  },
+  "clean_reviews": 58431,
+  "positive": 51692,
+  "negative": 6739,
+  "positive_users": 24124,
+  "positive_items": 3292,
+  "eligible_users": 2633,
+  "train_interactions": 46426,
+  "train_users": 24124,
+  "train_items": 3103,
+  "train_sparsity": 0.9993798022709288,
+  "user_counts": {
+    "count": 24124.0,
+    "mean": 2.1427623942961365,
+    "std": 1.7963783977105792,
+    "min": 1.0,
+    "25%": 1.0,
+    "50%": 1.0,
+    "75%": 3.0,
+    "max": 10.0
+  },
+  "top10_item_share": 0.2849570533157936,
+  "top1_id": "440",
+  "top1_count": 3571,
+  "chosen_k": 100,
+  "chosen_shrink": 50,
+  "base_validation": {
+    "precision10": 0.022066084314470186,
+    "recall10": 0.22066084314470186,
+    "ndcg10": 0.12361332301068813,
+    "mrr10": 0.09410383472290043,
+    "coverage": 0.004834031582339671,
+    "head_share": 1.0,
+    "users": 2633,
+    "cold_targets": 94
+  },
+  "model_validation": 0.11968269804186282,
+  "ndcg_difference": -0.005121331965159722,
+  "ndcg_difference_ci95": [
+    -0.009544935582949951,
+    -0.0006891074705259237
+  ],
+  "runtime_model_seconds": 10.574342356000216,
+  "versions": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8"
+  },
+  "data_hash": "49959f4c10de06ec090133e36024d00463f3d9f8ab8e2b624e827a7e5fc93f6c"
+}

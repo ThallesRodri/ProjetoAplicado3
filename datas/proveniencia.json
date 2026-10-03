@@ -1,0 +1,15 @@
+{
+  "fontes": {
+    "australian_user_reviews.json.gz": "https://mcauleylab.ucsd.edu/public_datasets/data/steam/australian_user_reviews.json.gz",
+    "steam_games.json.gz": "https://cseweb.ucsd.edu/~wckang/steam_games.json.gz"
+  },
+  "acesso": "2026-10-02",
+  "sha256": {
+    "australian_user_reviews.json.gz": "a934bf74d8579bb25bc7bf24e652a87e2ccc91064e429a4cb4af5809178687a8",
+    "steam_games.json.gz": "717f4653a26585fec8f463f59311a654127c2ed66b07b9f78b4c0ce64961c740"
+  },
+  "linhas_usuarios": 25799,
+  "linhas_sem_reviews": 28,
+  "reviews": 59305,
+  "metadados": "vers\u00e3o 2; somente exibi\u00e7\u00e3o de nomes"
+}
