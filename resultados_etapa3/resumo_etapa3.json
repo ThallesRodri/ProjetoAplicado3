@@ -1,0 +1,502 @@
+{
+  "auditoria": {
+    "linhas_brutas": 59305,
+    "usuarios_brutos": 25458,
+    "itens_brutos": 3682,
+    "ausentes": {
+      "user": 0,
+      "item": 0,
+      "positive": 0
+    },
+    "duplicatas": 874,
+    "conflitos": 0,
+    "unicas": 58431,
+    "positivas": 51692,
+    "negativas": 6739
+  },
+  "datas": {
+    "sem_ano": 9933,
+    "meses_sem_ano": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "max_data_inferida": "2016-09-18",
+    "max_data_datada": "2015-12-31"
+  },
+  "sementes": [
+    42,
+    7,
+    13,
+    2024,
+    2026
+  ],
+  "cob_min": 0.5,
+  "grades": {
+    "ItemKNN": [
+      {
+        "k": 20,
+        "shrink": 0
+      },
+      {
+        "k": 20,
+        "shrink": 10
+      },
+      {
+        "k": 20,
+        "shrink": 50
+      },
+      {
+        "k": 20,
+        "shrink": 100
+      },
+      {
+        "k": 20,
+        "shrink": 200
+      },
+      {
+        "k": 20,
+        "shrink": 500
+      },
+      {
+        "k": 20,
+        "shrink": 1000
+      },
+      {
+        "k": 50,
+        "shrink": 0
+      },
+      {
+        "k": 50,
+        "shrink": 10
+      },
+      {
+        "k": 50,
+        "shrink": 50
+      },
+      {
+        "k": 50,
+        "shrink": 100
+      },
+      {
+        "k": 50,
+        "shrink": 200
+      },
+      {
+        "k": 50,
+        "shrink": 500
+      },
+      {
+        "k": 50,
+        "shrink": 1000
+      },
+      {
+        "k": 100,
+        "shrink": 0
+      },
+      {
+        "k": 100,
+        "shrink": 10
+      },
+      {
+        "k": 100,
+        "shrink": 50
+      },
+      {
+        "k": 100,
+        "shrink": 100
+      },
+      {
+        "k": 100,
+        "shrink": 200
+      },
+      {
+        "k": 100,
+        "shrink": 500
+      },
+      {
+        "k": 100,
+        "shrink": 1000
+      },
+      {
+        "k": 200,
+        "shrink": 0
+      },
+      {
+        "k": 200,
+        "shrink": 10
+      },
+      {
+        "k": 200,
+        "shrink": 50
+      },
+      {
+        "k": 200,
+        "shrink": 100
+      },
+      {
+        "k": 200,
+        "shrink": 200
+      },
+      {
+        "k": 200,
+        "shrink": 500
+      },
+      {
+        "k": 200,
+        "shrink": 1000
+      },
+      {
+        "k": 500,
+        "shrink": 0
+      },
+      {
+        "k": 500,
+        "shrink": 10
+      },
+      {
+        "k": 500,
+        "shrink": 50
+      },
+      {
+        "k": 500,
+        "shrink": 100
+      },
+      {
+        "k": 500,
+        "shrink": 200
+      },
+      {
+        "k": 500,
+        "shrink": 500
+      },
+      {
+        "k": 500,
+        "shrink": 1000
+      }
+    ],
+    "RP3β": [
+      {
+        "alpha": 0.25,
+        "beta": 0.0,
+        "k": 50
+      },
+      {
+        "alpha": 0.25,
+        "beta": 0.0,
+        "k": 200
+      },
+      {
+        "alpha": 0.25,
+        "beta": 0.1,
+        "k": 50
+      },
+      {
+        "alpha": 0.25,
+        "beta": 0.1,
+        "k": 200
+      },
+      {
+        "alpha": 0.25,
+        "beta": 0.2,
+        "k": 50
+      },
+      {
+        "alpha": 0.25,
+        "beta": 0.2,
+        "k": 200
+      },
+      {
+        "alpha": 0.25,
+        "beta": 0.3,
+        "k": 50
+      },
+      {
+        "alpha": 0.25,
+        "beta": 0.3,
+        "k": 200
+      },
+      {
+        "alpha": 0.25,
+        "beta": 0.4,
+        "k": 50
+      },
+      {
+        "alpha": 0.25,
+        "beta": 0.4,
+        "k": 200
+      },
+      {
+        "alpha": 0.5,
+        "beta": 0.0,
+        "k": 50
+      },
+      {
+        "alpha": 0.5,
+        "beta": 0.0,
+        "k": 200
+      },
+      {
+        "alpha": 0.5,
+        "beta": 0.1,
+        "k": 50
+      },
+      {
+        "alpha": 0.5,
+        "beta": 0.1,
+        "k": 200
+      },
+      {
+        "alpha": 0.5,
+        "beta": 0.2,
+        "k": 50
+      },
+      {
+        "alpha": 0.5,
+        "beta": 0.2,
+        "k": 200
+      },
+      {
+        "alpha": 0.5,
+        "beta": 0.3,
+        "k": 50
+      },
+      {
+        "alpha": 0.5,
+        "beta": 0.3,
+        "k": 200
+      },
+      {
+        "alpha": 0.5,
+        "beta": 0.4,
+        "k": 50
+      },
+      {
+        "alpha": 0.5,
+        "beta": 0.4,
+        "k": 200
+      },
+      {
+        "alpha": 0.75,
+        "beta": 0.0,
+        "k": 50
+      },
+      {
+        "alpha": 0.75,
+        "beta": 0.0,
+        "k": 200
+      },
+      {
+        "alpha": 0.75,
+        "beta": 0.1,
+        "k": 50
+      },
+      {
+        "alpha": 0.75,
+        "beta": 0.1,
+        "k": 200
+      },
+      {
+        "alpha": 0.75,
+        "beta": 0.2,
+        "k": 50
+      },
+      {
+        "alpha": 0.75,
+        "beta": 0.2,
+        "k": 200
+      },
+      {
+        "alpha": 0.75,
+        "beta": 0.3,
+        "k": 50
+      },
+      {
+        "alpha": 0.75,
+        "beta": 0.3,
+        "k": 200
+      },
+      {
+        "alpha": 0.75,
+        "beta": 0.4,
+        "k": 50
+      },
+      {
+        "alpha": 0.75,
+        "beta": 0.4,
+        "k": 200
+      },
+      {
+        "alpha": 1.0,
+        "beta": 0.0,
+        "k": 50
+      },
+      {
+        "alpha": 1.0,
+        "beta": 0.0,
+        "k": 200
+      },
+      {
+        "alpha": 1.0,
+        "beta": 0.1,
+        "k": 50
+      },
+      {
+        "alpha": 1.0,
+        "beta": 0.1,
+        "k": 200
+      },
+      {
+        "alpha": 1.0,
+        "beta": 0.2,
+        "k": 50
+      },
+      {
+        "alpha": 1.0,
+        "beta": 0.2,
+        "k": 200
+      },
+      {
+        "alpha": 1.0,
+        "beta": 0.3,
+        "k": 50
+      },
+      {
+        "alpha": 1.0,
+        "beta": 0.3,
+        "k": 200
+      },
+      {
+        "alpha": 1.0,
+        "beta": 0.4,
+        "k": 50
+      },
+      {
+        "alpha": 1.0,
+        "beta": 0.4,
+        "k": 200
+      }
+    ],
+    "EASE": [
+      {
+        "lam": 10
+      },
+      {
+        "lam": 50
+      },
+      {
+        "lam": 100
+      },
+      {
+        "lam": 250
+      },
+      {
+        "lam": 500
+      },
+      {
+        "lam": 1000
+      },
+      {
+        "lam": 2500
+      },
+      {
+        "lam": 5000
+      }
+    ],
+    "iALS": [
+      {
+        "fatores": 64,
+        "reg": 100,
+        "alpha": 20,
+        "iters": 10
+      },
+      {
+        "fatores": 64,
+        "reg": 100,
+        "alpha": 100,
+        "iters": 10
+      },
+      {
+        "fatores": 64,
+        "reg": 300,
+        "alpha": 20,
+        "iters": 10
+      },
+      {
+        "fatores": 64,
+        "reg": 300,
+        "alpha": 100,
+        "iters": 10
+      },
+      {
+        "fatores": 64,
+        "reg": 1000,
+        "alpha": 20,
+        "iters": 10
+      },
+      {
+        "fatores": 64,
+        "reg": 1000,
+        "alpha": 100,
+        "iters": 10
+      },
+      {
+        "fatores": 64,
+        "reg": 3000,
+        "alpha": 20,
+        "iters": 10
+      },
+      {
+        "fatores": 64,
+        "reg": 3000,
+        "alpha": 100,
+        "iters": 10
+      }
+    ]
+  },
+  "betas": [
+    0.05,
+    0.1,
+    0.2,
+    0.5,
+    1.0,
+    2.0,
+    5.0
+  ],
+  "temporal": {
+    "B-com-inferencia": {
+      "cortes": {
+        "t_val": "2015-11-19",
+        "t_teste": "2016-03-21"
+      },
+      "treino": 41349,
+      "validacao": 5164,
+      "teste": 5179,
+      "itens_teste_ausentes_hist": 1085
+    },
+    "B-somente-datados": {
+      "cortes": {
+        "t_val": "2015-06-08",
+        "t_teste": "2015-09-23"
+      },
+      "treino": 34812,
+      "validacao": 4366,
+      "teste": 4379,
+      "itens_teste_ausentes_hist": 894
+    }
+  },
+  "versoes": {
+    "python": "3.13.17",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1"
+  },
+  "hash_dados": "49959f4c10de06ec090133e36024d00463f3d9f8ab8e2b624e827a7e5fc93f6c",
+  "tempo_total_s": 3300.5186748909996
+}

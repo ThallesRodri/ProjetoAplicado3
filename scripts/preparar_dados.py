@@ -6,7 +6,7 @@ from urllib.request import urlretrieve
 import ast, gzip, hashlib, json
 import pandas as pd
 BASE = Path(__file__).resolve().parent
-D = BASE / 'dados'
+D = BASE.parent / 'dados'  # pasta dados/ na raiz do pacote
 D.mkdir(exist_ok=True)
 URLS = {
  'australian_user_reviews.json.gz':
@@ -22,7 +22,7 @@ def preparar():
             urlretrieve(url, p)
         manifesto['sha256'][nome] = hashlib.sha256(p.read_bytes()).hexdigest()
     rows = []; linhas = vazios = 0
-    with gzip.open(D / 'australian_user_reviews.json.gz', 'rt') as f:
+    with gzip.open(D / 'australian_user_reviews.json.gz', 'rt', encoding='utf-8') as f:
         for line in f:
             d = ast.literal_eval(line)  # Nunca executar eval em dados externos.
             linhas += 1
@@ -34,13 +34,13 @@ def preparar():
     df = pd.DataFrame(rows, columns=['user', 'item', 'positive', 'posted'])
     df.to_csv(D / 'interacoes.csv.gz', index=False, compression='gzip')
     jogos = []
-    with gzip.open(D / 'steam_games.json.gz', 'rt') as f:
+    with gzip.open(D / 'steam_games.json.gz', 'rt', encoding='utf-8') as f:
         for line in f:
             r = ast.literal_eval(line)
             if r.get('id'):
                 jogos.append((r['id'], r.get('title', r.get('app_name', ''))))
     pd.DataFrame(jogos, columns=['item', 'title']).drop_duplicates('item').to_csv(
-        D / 'titulos.csv', index=False)
+        D / 'titulos.csv', index=False, encoding='utf-8')
     manifesto.update(linhas_usuarios=linhas, linhas_sem_reviews=vazios,
                      reviews=len(df), metadados='versão 2; somente exibição de nomes')
     (D / 'proveniencia.json').write_text(json.dumps(manifesto, indent=2), encoding='utf-8')

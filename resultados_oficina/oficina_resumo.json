@@ -1,0 +1,74 @@
+{
+ "participantes": 5,
+ "jogos_escolhidos_media": 6.0,
+ "jogos_em_comum_media": 6.0,
+ "fora_da_cabeca_media": 0.6,
+ "comentarios": 2,
+ "itens": [
+  {
+   "item": "Q1 Acerto percebido",
+   "n": 5,
+   "media": 3.2,
+   "mediana": 3.0,
+   "concordam_4_5": 0.4,
+   "discordam_1_2": 0.4,
+   "nota_1": 0,
+   "nota_2": 2,
+   "nota_3": 1,
+   "nota_4": 1,
+   "nota_5": 1
+  },
+  {
+   "item": "Q2 Novidade",
+   "n": 5,
+   "media": 1.4,
+   "mediana": 1.0,
+   "concordam_4_5": 0.0,
+   "discordam_1_2": 1.0,
+   "nota_1": 3,
+   "nota_2": 2,
+   "nota_3": 0,
+   "nota_4": 0,
+   "nota_5": 0
+  },
+  {
+   "item": "Q3 Preferência pelo modelo",
+   "n": 5,
+   "media": 3.4,
+   "mediana": 3.0,
+   "concordam_4_5": 0.2,
+   "discordam_1_2": 0.0,
+   "nota_1": 0,
+   "nota_2": 0,
+   "nota_3": 4,
+   "nota_4": 0,
+   "nota_5": 1
+  },
+  {
+   "item": "Q4 Compreensão",
+   "n": 5,
+   "media": 3.8,
+   "mediana": 4.0,
+   "concordam_4_5": 0.8,
+   "discordam_1_2": 0.2,
+   "nota_1": 1,
+   "nota_2": 0,
+   "nota_3": 0,
+   "nota_4": 2,
+   "nota_5": 2
+  },
+  {
+   "item": "Q5 Objetivo extensionista",
+   "n": 5,
+   "media": 3.2,
+   "mediana": 3.0,
+   "concordam_4_5": 0.4,
+   "discordam_1_2": 0.2,
+   "nota_1": 0,
+   "nota_2": 1,
+   "nota_3": 2,
+   "nota_4": 2,
+   "nota_5": 0
+  }
+ ]
+}

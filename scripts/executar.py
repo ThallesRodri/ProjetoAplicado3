@@ -11,7 +11,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 BASE = Path(__file__).resolve().parent
-D, R = BASE/'dados', BASE/'resultados'
+D, R = BASE.parent/'dados', BASE.parent/'resultados_etapa2'  # pastas na raiz do pacote
 R.mkdir(exist_ok=True)
 SEED, TOP = 42, 10
 if not (D/'interacoes.csv.gz').exists():
@@ -126,11 +126,11 @@ save_npz(R/'matriz_treino.npz',X);save_npz(R/'modelo_itemknn.npz',S)
 (R/'mapas.json').write_text(json.dumps({'users':users,'items':items}),encoding='utf-8')
 # Exemplo determinístico: primeiro usuário da lista de teste, sem seleção por acerto.
 r=test.iloc[0];u=um[r.user]
-titles=pd.read_csv(D/'titulos.csv',dtype={'item':str}).set_index('item').title.to_dict()
+titles=pd.read_csv(D/'titulos.csv',dtype={'item':str},encoding='utf-8').set_index('item').title.to_dict()
 example={'user':r.user,'treino':[{'id':items[i],'titulo':titles.get(items[i],items[i])}
      for i in X[u].indices], 'alvo_teste':{'id':r['item'],'titulo':titles.get(r['item'],r['item'])},
      'top10':[{'id':items[i],'titulo':titles.get(items[i],items[i])} for i in recs[0]]}
-(R/'exemplo.json').write_text(json.dumps(example,ensure_ascii=False,indent=2))
+(R/'exemplo.json').write_text(json.dumps(example,ensure_ascii=False,indent=2),encoding='utf-8')
 # Estatísticas e gráficos exploratórios não são usados para escolher parâmetros.
 items_count=pos.groupby('item').size().sort_values(ascending=False)
 summary={'raw_reviews':len(raw),'raw_users':raw.user.nunique(),

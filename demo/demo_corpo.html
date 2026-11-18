@@ -1,0 +1,303 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Oficina do Recomendador Steam</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: uma coluna de leitura com quatro passos; no passo 2, duas listas lado a lado (modelo x popularidade). */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#131a24; --ink2:#4a5564; --muted:#7b8594; --line:#d9dee6;
+  --model:#2a78d6; --model-soft:#e3eefb; --pop:#3d3c39; --pop-soft:#e9e8e4; --ok:#0f7a4f; --warn:#a45a00;
+  --display:'Chakra Petch','Trebuchet MS',Arial,sans-serif; --body:'Inter',Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#10151c; --surface:#19212b; --ink:#eef1f5; --ink2:#b9c2ce; --muted:#8793a3; --line:#2c3643;
+  --model:#5b9ff0; --model-soft:#1c3250; --pop:#c9c7bf; --pop-soft:#2b2f36; --ok:#4cc38f; --warn:#e3a54a; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#10151c; --surface:#19212b; --ink:#eef1f5; --ink2:#b9c2ce; --muted:#8793a3; --line:#2c3643;
+  --model:#5b9ff0; --model-soft:#1c3250; --pop:#c9c7bf; --pop-soft:#2b2f36; --ok:#4cc38f; --warn:#e3a54a; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 48px}
+.wrap{max-width:980px;margin-inline:auto;display:flex;flex-direction:column;gap:20px}
+header h1{font-family:var(--display);font-size:clamp(26px,5vw,38px);line-height:1.1;margin:0;text-wrap:balance}
+header p{color:var(--ink2);margin:8px 0 0;max-width:65ch}
+.tag{font-family:var(--display);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--model)}
+section{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:14px}
+section h2{font-family:var(--display);font-size:20px;margin:0;display:flex;gap:10px;align-items:baseline}
+section h2 span{color:var(--muted);font-size:14px;font-weight:500}
+.hint{color:var(--ink2);font-size:14px;margin:0;max-width:70ch}
+.busca{position:relative}
+input[type=text],textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+input[type=text]:focus,textarea:focus,button:focus-visible,.likert input:focus-visible+span{outline:2px solid var(--model);outline-offset:2px}
+.sug{position:absolute;left:0;right:0;top:100%;z-index:5;background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-top:4px;max-height:280px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.sug button{display:flex;justify-content:space-between;gap:12px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:10px 14px;color:var(--ink);font:inherit;cursor:pointer}
+.sug button:hover,.sug button.ativo{background:var(--model-soft)}
+.sug small{color:var(--muted);white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--model-soft);color:var(--ink);border:1px solid var(--model);border-radius:999px;padding:6px 6px 6px 12px;font-size:14px}
+.chip button{border:0;background:var(--model);color:var(--surface);border-radius:50%;width:22px;height:22px;cursor:pointer;line-height:1;font-size:14px}
+.rapidos{display:flex;flex-wrap:wrap;gap:6px}
+.rapidos button{font:inherit;font-size:13px;background:var(--bg);border:1px solid var(--line);color:var(--ink2);border-radius:999px;padding:5px 11px;cursor:pointer}
+.rapidos button:hover{border-color:var(--model);color:var(--ink)}
+.listas{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.lista{min-width:0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.lista h3{margin:0;padding:10px 14px;font-family:var(--display);font-size:15px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.lista.m h3{background:var(--model-soft);border-bottom:2px solid var(--model)}
+.lista.p h3{background:var(--pop-soft);border-bottom:2px solid var(--pop)}
+.lista h3 small{font-family:var(--body);font-weight:500;color:var(--ink2);font-size:12px}
+.lista ol{list-style:none;margin:0;padding:0}
+.lista li{display:grid;grid-template-columns:26px 1fr;gap:4px 8px;padding:9px 14px;border-bottom:1px solid var(--line)}
+.lista li:last-child{border-bottom:0}
+.lista .n{color:var(--muted);font-variant-numeric:tabular-nums;font-size:13px;padding-top:2px}
+.lista .t{font-weight:500;overflow-wrap:anywhere}
+.lista .d{grid-column:2;font-size:12.5px;color:var(--ink2);display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.barra{display:inline-block;height:6px;border-radius:3px;background:var(--pop);opacity:.75;vertical-align:middle}
+.lista.m .barra{background:var(--model)}
+.novo{color:var(--ok);font-weight:600}
+.resumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.resumo div{background:var(--bg);border-radius:8px;padding:12px 14px}
+.resumo b{font-family:var(--display);font-size:24px;display:block;font-variant-numeric:tabular-nums}
+.resumo span{font-size:13px;color:var(--ink2)}
+.explica{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.explica div{min-width:0}
+.explica h3{font-family:var(--display);font-size:15px;margin:0 0 4px}
+.explica p{margin:0;font-size:14px;color:var(--ink2)}
+.cob{display:flex;flex-direction:column;gap:8px;font-size:13px}
+.cob .linha{display:grid;grid-template-columns:150px 1fr 54px;gap:8px;align-items:center}
+.cob .trilho{height:12px;background:var(--bg);border-radius:6px;overflow:hidden}
+.cob .trilho i{display:block;height:100%;border-radius:6px}
+.q{display:flex;flex-direction:column;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.q p{margin:0;font-weight:500}
+.likert{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--ink2)}
+.likert label{position:relative;cursor:pointer}
+.likert input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.likert span{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.likert input:checked+span{background:var(--model);border-color:var(--model);color:var(--surface)}
+.acoes{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button.pri,button.sec{font:inherit;font-weight:600;border-radius:8px;padding:11px 18px;cursor:pointer}
+button.pri{background:var(--model);color:var(--surface);border:1px solid var(--model)}
+button.sec{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+button.pri:disabled{opacity:.45;cursor:not-allowed}
+.msg{font-size:14px;color:var(--ok);font-weight:500}
+.msg.erro{color:var(--warn)}
+.rodape{font-size:12.5px;color:var(--muted);max-width:75ch}
+details summary{cursor:pointer;font-weight:600}
+#saida{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;height:140px}
+@media (prefers-reduced-motion:no-preference){.lista li{animation:entra .25s ease both}}
+@keyframes entra{from{transform:translateY(4px)}to{transform:none}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="tag">Projeto Aplicado III · Mackenzie · Oficina</div>
+  <h1>Como um recomendador escolhe jogos para você</h1>
+  <p>Escolha alguns jogos de que você gosta e compare duas listas: a de um modelo treinado com avaliações reais de jogadores da Steam e a lista dos jogos mais populares. No final, responda a cinco perguntas rápidas. Nenhum dado pessoal é pedido ou guardado.</p>
+</header>
+
+<section aria-labelledby="h-p1">
+  <h2 id="h-p1">1. Escolha jogos de que você gosta <span>de 1 a 10 jogos</span></h2>
+  <div class="busca">
+    <input type="text" id="campo" placeholder="Digite o nome de um jogo (ex.: Portal, Terraria, Skyrim)" autocomplete="off" aria-label="Buscar jogo">
+    <div class="sug" id="sug" hidden></div>
+  </div>
+  <div class="chips" id="chips" aria-live="polite"></div>
+  <p class="hint">Não lembra de um nome? Toque em um dos jogos mais avaliados da base:</p>
+  <div class="rapidos" id="rapidos"></div>
+</section>
+
+<section aria-labelledby="h-p2">
+  <h2 id="h-p2">2. Compare as duas listas</h2>
+  <p class="hint" id="estado">As listas abaixo usam um exemplo. Escolha seus jogos no passo 1 para ver as suas recomendações.</p>
+  <div class="listas">
+    <div class="lista m"><h3>Modelo personalizado <small id="tm"></small></h3><ol id="lm"></ol></div>
+    <div class="lista p"><h3>Mais populares <small>igual para todo mundo</small></h3><ol id="lp"></ol></div>
+  </div>
+  <div class="resumo" id="resumo"></div>
+</section>
+
+<section aria-labelledby="h-p3">
+  <h2 id="h-p3">3. O que está acontecendo</h2>
+  <div class="explica">
+    <div><h3>De onde vêm os dados</h3><p id="ex1"></p></div>
+    <div><h3>Como o modelo decide</h3><p>O modelo percorre um caminho de três passos: dos seus jogos para as pessoas que também gostaram deles, e dessas pessoas para outros jogos de que elas gostaram. Jogos que aparecem em muitos caminhos sobem na lista. Um desconto reduz a vantagem dos jogos que já são muito populares.</p></div>
+    <div><h3>Por que isso importa</h3><p>Uma lista só de populares acerta bastante, mas mostra sempre os mesmos jogos. O modelo acerta o mesmo tanto e mostra muito mais jogos do catálogo. Recomendar não garante que você vai gostar: confira avaliações, preço e requisitos antes de comprar.</p></div>
+  </div>
+  <div class="cob" id="cob" aria-label="Parte do catálogo que aparece nas recomendações de cada estratégia"></div>
+</section>
+
+<section aria-labelledby="h-p4">
+  <h2 id="h-p4">4. Sua opinião <span>anônima, 1 minuto</span></h2>
+  <p class="hint">Marque de 1 (discordo totalmente) a 5 (concordo totalmente).</p>
+  <form id="form" novalidate></form>
+  <div class="q" style="border:0;padding:0">
+    <p><label for="coment">Comentário (opcional, sem nome nem contato)</label></p>
+    <textarea id="coment" rows="2" maxlength="300"></textarea>
+  </div>
+  <div class="acoes">
+    <button class="pri" id="enviar" type="button">Registrar resposta</button>
+    <button class="sec" id="nova" type="button">Próxima pessoa</button>
+    <span class="msg" id="msg" role="status"></span>
+  </div>
+</section>
+
+<section aria-labelledby="h-p5">
+  <h2 id="h-p5">Para quem conduz a oficina <span id="cont"></span></h2>
+  <p class="hint">As respostas ficam guardadas só neste navegador. Ao final, baixe ou copie o arquivo e envie para a equipe consolidar os resultados.</p>
+  <div class="acoes">
+    <button class="sec" id="baixar" type="button">Baixar respostas (CSV)</button>
+    <button class="sec" id="copiar" type="button">Copiar respostas</button>
+    <span class="msg" id="msg2" role="status"></span>
+  </div>
+  <details><summary>Ver respostas registradas</summary><textarea id="saida" readonly aria-label="Respostas em CSV"></textarea>
+  <div class="acoes" style="margin-top:8px"><button class="sec" id="apagar" type="button">Apagar respostas deste navegador</button><button class="sec" id="confirma" type="button" hidden>Confirmar: apagar tudo</button></div></details>
+</section>
+
+<p class="rodape" id="rodape"></p>
+</div>
+
+<script>
+const D = /*DADOS*/null/*FIM*/;
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const N = D.titulos.length;
+function b64(s, T){ const b = atob(s), u = new Uint8Array(b.length); for(let i=0;i<b.length;i++) u[i]=b.charCodeAt(i); return new T(u.buffer); }
+const ptr = b64(D.w.ptr, Uint32Array), idx = b64(D.w.idx, Uint16Array), val = b64(D.w.val, Uint16Array), rmax = b64(D.w.rmax, Float32Array);
+const pop = D.pop, popMax = Math.max.apply(null, pop);
+const ordemPop = Array.from({length:N}, (_, i) => i).sort((a, b) => pop[b] - pop[a] || D.ids[a] - D.ids[b]);
+const cabeca = new Set(ordemPop.slice(0, Math.ceil(0.1 * N)));
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+const chave = D.titulos.map(norm);
+const fmt = n => n.toLocaleString('pt-BR');
+let sel = [], usouExemplo = true;
+const EXEMPLO = D.exemplo;
+
+function recomendar(hist){
+  const s = new Float64Array(N), por = new Int32Array(N).fill(-1), melhor = new Float64Array(N);
+  for(const i of hist){ const m = rmax[i] / 65535;
+    for(let k = ptr[i]; k < ptr[i+1]; k++){ const j = idx[k], w = val[k] * m; s[j] += w; if(w > melhor[j]){ melhor[j] = w; por[j] = i; } } }
+  const fora = new Set(hist);
+  const ord = Array.from({length:N}, (_, i) => i).filter(i => !fora.has(i))
+    .sort((a, b) => s[b] - s[a] || pop[b] - pop[a] || D.ids[a] - D.ids[b]);
+  return {modelo: ord.slice(0, 10), por, popular: ordemPop.filter(i => !fora.has(i)).slice(0, 10)};
+}
+function item(j, n, extra){
+  const li = document.createElement('li');
+  const a = document.createElement('span'); a.className = 'n'; a.textContent = n + '.';
+  const t = document.createElement('span'); t.className = 't'; t.textContent = D.titulos[j];
+  const d = document.createElement('span'); d.className = 'd';
+  const b = document.createElement('span'); b.className = 'barra'; b.style.width = Math.max(4, Math.round(60 * Math.sqrt(pop[j] / popMax))) + 'px';
+  const c = document.createElement('span'); c.textContent = fmt(pop[j]) + (pop[j] === 1 ? ' avaliação positiva' : ' avaliações positivas');
+  d.append(b, c);
+  if(extra){ const e = document.createElement('span'); e.textContent = extra; d.append(e); }
+  if(!cabeca.has(j)){ const e = document.createElement('span'); e.className = 'novo'; e.textContent = 'fora dos 10% mais populares'; d.append(e); }
+  li.append(a, t, d); li.style.animationDelay = (n * 25) + 'ms'; return li;
+}
+function desenhar(){
+  const hist = sel.length ? sel : EXEMPLO; usouExemplo = !sel.length;
+  const r = recomendar(hist);
+  $('estado').textContent = usouExemplo
+    ? 'As listas abaixo usam um exemplo (' + EXEMPLO.map(i => D.titulos[i]).join(', ') + '). Escolha seus jogos no passo 1 para ver as suas recomendações.'
+    : 'Recomendações para quem gostou de: ' + sel.map(i => D.titulos[i]).join(', ') + '.';
+  $('tm').textContent = 'muda conforme os jogos escolhidos';
+  const lm = $('lm'), lp = $('lp'); lm.replaceChildren(); lp.replaceChildren();
+  r.modelo.forEach((j, k) => lm.append(item(j, k + 1, r.por[j] >= 0 ? 'porque você gostou de ' + D.titulos[r.por[j]] : 'entre os mais populares')));
+  r.popular.forEach((j, k) => lp.append(item(j, k + 1)));
+  const comuns = r.modelo.filter(j => r.popular.includes(j)).length;
+  const fc = r.modelo.filter(j => !cabeca.has(j)).length;
+  $('resumo').innerHTML = '';
+  [[comuns + ' de 10', 'jogos aparecem nas duas listas'], [fc + ' de 10', 'jogos do modelo estão fora dos 10% mais populares'],
+   [fmt(N), 'jogos no catálogo que o modelo pode recomendar']].forEach(([v, t]) => {
+    const dv = document.createElement('div'), b = document.createElement('b'), s = document.createElement('span');
+    b.textContent = v; s.textContent = t; dv.append(b, s); $('resumo').append(dv); });
+  return r;
+}
+function chips(){
+  const c = $('chips'); c.replaceChildren();
+  sel.forEach(i => { const s = document.createElement('span'); s.className = 'chip'; s.textContent = D.titulos[i];
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = '×'; b.setAttribute('aria-label', 'Remover ' + D.titulos[i]);
+    b.onclick = () => { sel = sel.filter(x => x !== i); chips(); desenhar(); }; s.append(b); c.append(s); });
+}
+function escolher(i){ if(sel.includes(i) || sel.length >= 10) return; sel.push(i); chips(); desenhar(); $('campo').value = ''; $('sug').hidden = true; }
+let ativo = -1, achados = [];
+$('campo').addEventListener('input', e => {
+  const q = norm(e.target.value.trim()); const box = $('sug'); box.replaceChildren(); ativo = -1;
+  if(q.length < 2){ box.hidden = true; return; }
+  achados = []; for(const i of ordemPop){ if(chave[i].includes(q) && !sel.includes(i)){ achados.push(i); if(achados.length >= 12) break; } }
+  if(!achados.length){ const p = document.createElement('button'); p.type = 'button'; p.disabled = true; p.textContent = 'Nenhum jogo da base com esse nome'; box.append(p); }
+  achados.forEach(i => { const b = document.createElement('button'); b.type = 'button';
+    const t = document.createElement('span'); t.textContent = D.titulos[i]; const s = document.createElement('small'); s.textContent = fmt(pop[i]) + ' aval.';
+    b.append(t, s); b.onclick = () => escolher(i); box.append(b); });
+  box.hidden = false;
+});
+$('campo').addEventListener('keydown', e => {
+  const bs = $('sug').querySelectorAll('button:not(:disabled)'); if(!bs.length) return;
+  if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){ e.preventDefault(); ativo = (ativo + (e.key === 'ArrowDown' ? 1 : -1) + bs.length) % bs.length;
+    bs.forEach((b, k) => b.classList.toggle('ativo', k === ativo)); bs[ativo].scrollIntoView({block:'nearest'}); }
+  else if(e.key === 'Enter'){ e.preventDefault(); escolher(achados[Math.max(ativo, 0)]); }
+  else if(e.key === 'Escape'){ $('sug').hidden = true; }
+});
+document.addEventListener('click', e => { if(!e.target.closest('.busca')) $('sug').hidden = true; });
+ordemPop.slice(0, 18).forEach(i => { const b = document.createElement('button'); b.type = 'button'; b.textContent = D.titulos[i]; b.onclick = () => escolher(i); $('rapidos').append(b); });
+
+// Passo 3
+$('ex1').textContent = 'A base pública reúne ' + fmt(D.meta.interacoes) + ' avaliações positivas feitas por ' + fmt(D.meta.usuarios) +
+  ' jogadores da comunidade australiana da Steam, coletadas pela Universidade da Califórnia em San Diego. Os nomes dos jogadores foram trocados por códigos.';
+[['Mais populares', D.meta.cob_pop, 'var(--pop)'], ['Modelo personalizado', D.meta.cob_modelo, 'var(--model)']].forEach(([n, v, cor]) => {
+  const l = document.createElement('div'); l.className = 'linha';
+  const a = document.createElement('span'); a.textContent = n;
+  const t = document.createElement('span'); t.className = 'trilho'; const i = document.createElement('i'); i.style.width = Math.max(0.6, v * 100) + '%'; i.style.background = cor; t.append(i);
+  const p = document.createElement('b'); p.textContent = (v * 100).toLocaleString('pt-BR', {maximumFractionDigits: 1}) + '%'; l.append(a, t, p); $('cob').append(l); });
+const leg = document.createElement('span'); leg.style.color = 'var(--ink2)';
+leg.textContent = 'Parte do catálogo que apareceu em pelo menos uma lista de recomendação nos testes do projeto.'; $('cob').append(leg);
+
+// Passo 4
+const PERGUNTAS = [
+  'As recomendações do modelo personalizado fizeram sentido para os jogos que escolhi.',
+  'Encontrei na lista do modelo pelo menos um jogo que eu não conhecia e que me interessou.',
+  'Prefiro a lista do modelo personalizado à lista dos mais populares.',
+  'Entendi a explicação de como a recomendação é produzida.',
+  'Agora entendo melhor por que os jogos populares aparecem tanto nas recomendações.'];
+PERGUNTAS.forEach((t, k) => { const q = document.createElement('div'); q.className = 'q';
+  const p = document.createElement('p'); p.id = 'pq' + k; p.textContent = (k + 1) + '. ' + t;
+  const l = document.createElement('div'); l.className = 'likert'; l.setAttribute('role', 'radiogroup'); l.setAttribute('aria-labelledby', 'pq' + k);
+  const a = document.createElement('span'); a.textContent = 'discordo'; l.append(a);
+  for(let v = 1; v <= 5; v++){ const lab = document.createElement('label'); const i = document.createElement('input'); i.type = 'radio'; i.name = 'q' + k; i.value = v; i.id = 'q' + k + '_' + v;
+    const s = document.createElement('span'); s.textContent = v; lab.append(i, s); l.append(lab); }
+  const z = document.createElement('span'); z.textContent = 'concordo'; l.append(z); q.append(p, l); $('form').append(q); });
+
+const CH = 'oficina_recomendador_respostas_v1';
+let mem = [];
+function ler(){ try{ const t = localStorage.getItem(CH); if(t) mem = JSON.parse(t); }catch(e){} return mem; }
+function gravar(){ try{ localStorage.setItem(CH, JSON.stringify(mem)); }catch(e){} }
+function csv(){
+  const cab = ['n', 'data_hora', 'jogos_escolhidos', 'q1', 'q2', 'q3', 'q4', 'q5', 'jogos_em_comum', 'fora_da_cabeca', 'comentario'];
+  const esc = s => '"' + String(s).replace(/"/g, '""') + '"';
+  return [cab.join(';')].concat(mem.map((r, k) => [k + 1, r.t, esc(r.jogos.join(' | ')), r.q[0], r.q[1], r.q[2], r.q[3], r.q[4], r.comuns, r.fc, esc(r.c)].join(';'))).join('\n');
+}
+function atualizar(){ $('cont').textContent = mem.length + (mem.length === 1 ? ' resposta registrada' : ' respostas registradas'); $('saida').value = csv(); }
+ler(); atualizar();
+$('enviar').onclick = () => {
+  const q = PERGUNTAS.map((_, k) => { const m = document.querySelector('input[name=q' + k + ']:checked'); return m ? +m.value : 0; });
+  const m = $('msg');
+  if(!sel.length){ m.className = 'msg erro'; m.textContent = 'Escolha ao menos um jogo no passo 1 antes de responder.'; return; }
+  if(q.includes(0)){ m.className = 'msg erro'; m.textContent = 'Falta responder à pergunta ' + (q.indexOf(0) + 1) + '.'; return; }
+  const r = recomendar(sel);
+  mem.push({t: new Date().toISOString().slice(0, 16), jogos: sel.map(i => D.titulos[i]), q, c: $('coment').value.trim(),
+            comuns: r.modelo.filter(j => r.popular.includes(j)).length, fc: r.modelo.filter(j => !cabeca.has(j)).length});
+  gravar(); atualizar(); m.className = 'msg'; m.textContent = 'Resposta registrada. Obrigado! Toque em "Próxima pessoa" para recomeçar.';
+};
+$('nova').onclick = () => { sel = []; chips(); desenhar(); $('form').reset(); $('coment').value = ''; $('msg').textContent = ''; window.scrollTo({top: 0, behavior: 'smooth'}); $('campo').focus(); };
+$('baixar').onclick = () => { const m = $('msg2');
+  try{ const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + csv()], {type: 'text/csv'})); a.download = 'respostas_oficina.csv'; document.body.append(a); a.click(); a.remove();
+    m.className = 'msg'; m.textContent = 'Se o arquivo não baixar neste aplicativo, use "Copiar respostas".'; }catch(e){ m.className = 'msg erro'; m.textContent = 'Não foi possível baixar aqui. Use "Copiar respostas".'; } };
+$('copiar').onclick = () => { const m = $('msg2'); const ok = () => { m.className = 'msg'; m.textContent = 'Respostas copiadas. Cole em um arquivo de texto e salve como respostas_oficina.csv.'; };
+  const falha = () => { document.querySelector('details').open = true; $('saida').focus(); $('saida').select(); m.className = 'msg erro'; m.textContent = 'Selecione o texto abaixo e copie manualmente.'; };
+  try{ navigator.clipboard.writeText(csv()).then(ok, falha); }catch(e){ falha(); } };
+$('apagar').onclick = () => { $('confirma').hidden = false; };
+$('confirma').onclick = () => { mem = []; gravar(); atualizar(); $('confirma').hidden = true; };
+$('rodape').textContent = 'Modelo: ' + D.meta.modelo + '. Dados: Steam Video Game and Bundle Data, versão 1 (UCSD; Pathak, Gupta e McAuley, 2017). ' +
+  'Projeto Aplicado III, Curso Superior de Tecnologia em Banco de Dados, Universidade Presbiteriana Mackenzie. Equipe: Leandro Henrique Pereira, Murilo Freitas Rodrigues e Thalles Rodrigues. ' +
+  'Os nomes dos jogos são históricos e podem ter mudado na loja; oito nomes ausentes dos metadados foram complementados manualmente.';
+desenhar();
+})();
+</script>

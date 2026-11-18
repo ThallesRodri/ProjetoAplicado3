@@ -1,0 +1,150 @@
+[
+ {
+  "faixa": "3",
+  "usuario": "000db80e",
+  "historico": [
+   "Garry's Mod",
+   "Train Simulator",
+   "Gone Home"
+  ],
+  "alvo": "The Interview",
+  "pos_final": 0,
+  "pos_pop": 0,
+  "final": [
+   "Team Fortress 2",
+   "Counter-Strike: Global Offensive",
+   "Unturned",
+   "Left 4 Dead 2",
+   "Rust",
+   "Portal 2",
+   "PAYDAY 2",
+   "Dota 2",
+   "Terraria",
+   "App 72850"
+  ],
+  "popularidade": [
+   "Team Fortress 2",
+   "Counter-Strike: Global Offensive",
+   "Dota 2",
+   "Unturned",
+   "PAYDAY 2",
+   "Left 4 Dead 2",
+   "Terraria",
+   "Rust",
+   "App 72850",
+   "DayZ"
+  ]
+ },
+ {
+  "faixa": "4-5",
+  "usuario": "00982d06",
+  "historico": [
+   "Fistful of Frags",
+   "Lambda Wars Beta",
+   "PAYDAY 2: Yakuza Character Pack",
+   "Stardew Valley"
+  ],
+  "alvo": "Kung Fury",
+  "pos_final": 0,
+  "pos_pop": 0,
+  "final": [
+   "Counter-Strike: Global Offensive",
+   "Team Fortress 2",
+   "Garry's Mod",
+   "PAYDAY 2: The OVERKILL Pack",
+   "PAYDAY 2",
+   "Dying Light",
+   "Dota 2",
+   "Killing Floor",
+   "DOOM II",
+   "Highschool Romance"
+  ],
+  "popularidade": [
+   "Team Fortress 2",
+   "Counter-Strike: Global Offensive",
+   "Garry's Mod",
+   "Dota 2",
+   "Unturned",
+   "PAYDAY 2",
+   "Left 4 Dead 2",
+   "Terraria",
+   "Rust",
+   "App 72850"
+  ]
+ },
+ {
+  "faixa": "6 ou mais",
+  "usuario": "016aa857",
+  "historico": [
+   "Team Fortress 2",
+   "Portal 2",
+   "Terraria",
+   "DARK SOULS™: Prepare To Die™ Edition",
+   "DARK SOULS™ II",
+   "DARK SOULS™ II: Scholar of the First Sin"
+  ],
+  "alvo": "DRAGON BALL XENOVERSE",
+  "pos_final": 0,
+  "pos_pop": 0,
+  "final": [
+   "Counter-Strike: Global Offensive",
+   "Garry's Mod",
+   "Unturned",
+   "Dota 2",
+   "PAYDAY 2",
+   "Left 4 Dead 2",
+   "Borderlands 2",
+   "App 72850",
+   "Warframe",
+   "Rust"
+  ],
+  "popularidade": [
+   "Counter-Strike: Global Offensive",
+   "Garry's Mod",
+   "Dota 2",
+   "Unturned",
+   "PAYDAY 2",
+   "Left 4 Dead 2",
+   "Rust",
+   "App 72850",
+   "DayZ",
+   "Warframe"
+  ]
+ },
+ {
+  "faixa": "acerto do modelo final",
+  "usuario": "014dbe31",
+  "historico": [
+   "PlanetSide 2",
+   "Banished",
+   "PAYDAY: The Web Series"
+  ],
+  "alvo": "Warframe",
+  "pos_final": 10,
+  "pos_pop": 0,
+  "final": [
+   "Counter-Strike: Global Offensive",
+   "Team Fortress 2",
+   "Garry's Mod",
+   "Mortal Kombat: Legacy",
+   "App 220760",
+   "App 72850",
+   "Unturned",
+   "Dota 2",
+   "PAYDAY™ The Heist",
+   "Warframe"
+  ],
+  "popularidade": [
+   "Team Fortress 2",
+   "Counter-Strike: Global Offensive",
+   "Garry's Mod",
+   "Dota 2",
+   "Unturned",
+   "PAYDAY 2",
+   "Left 4 Dead 2",
+   "Terraria",
+   "Rust",
+   "App 72850"
+  ]
+ }
+]

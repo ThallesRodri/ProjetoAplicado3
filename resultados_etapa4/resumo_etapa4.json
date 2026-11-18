@@ -1,0 +1,112 @@
+{
+  "delta": 0.005,
+  "componentes_fusao": {
+    "RP3β": {
+      "alpha": 0.5,
+      "beta": 0.0,
+      "k": 200
+    },
+    "EASE": {
+      "lam": 500
+    },
+    "iALS": {
+      "fatores": 64,
+      "reg": 1000,
+      "alpha": 100,
+      "iters": 10
+    }
+  },
+  "cstar": {
+    "familia": "Fusão",
+    "hp": {
+      "RP3β": 0.0,
+      "EASE": 0.5,
+      "iALS": 0.5
+    },
+    "val_ndcg": 0.12878101875103026,
+    "val_cob": 0.051963472218119464
+  },
+  "final": {
+    "familia": "RP3β",
+    "hp": {
+      "alpha": 0.5,
+      "beta": 0.15,
+      "k": 50
+    }
+  },
+  "fusao": {
+    "hp": {
+      "RP3β": 0.0,
+      "EASE": 0.5,
+      "iALS": 0.5
+    },
+    "val_ndcg": 0.12878101875103026,
+    "val_cob": 0.051963472218119464
+  },
+  "pop_val_ndcg": 0.12248850334898313,
+  "candidatos": 16,
+  "fronteira": 30,
+  "configs_elegiveis": 165,
+  "configs_etapa4": 74,
+  "agregado_usuarios": {
+    "ItemKNN (etapa 2)": {
+      "dif_pop": -0.005922778904138674,
+      "ic_inf": -0.008604115040795054,
+      "ic_sup": -0.0032163885623999106,
+      "p": 0.0,
+      "dif_cstar": -0.010536995899882875,
+      "ic_inf_cstar": -0.01242143921569689,
+      "ic_sup_cstar": -0.00860784898738269,
+      "p_cstar": 0.0
+    },
+    "Máximo acerto (c*)": {
+      "dif_pop": 0.0046142169957442015,
+      "ic_inf": 0.0025408666332746702,
+      "ic_sup": 0.006645544831620861,
+      "p": 0.0
+    },
+    "Modelo final (F)": {
+      "dif_pop": 0.002885734806394158,
+      "ic_inf": 0.0006983517459194944,
+      "ic_sup": 0.0052457448676541335,
+      "p": 0.015,
+      "dif_cstar": -0.0017284821893500432,
+      "ic_inf_cstar": -0.0031326100276226634,
+      "ic_sup_cstar": -0.0002588193608675977,
+      "p_cstar": 0.02
+    },
+    "Fusão": {
+      "dif_pop": 0.0046142169957442015,
+      "ic_inf": 0.0025408666332746702,
+      "ic_sup": 0.006645544831620861,
+      "p": 0.0,
+      "dif_cstar": 0.0,
+      "ic_inf_cstar": 0.0,
+      "ic_sup_cstar": 0.0,
+      "p_cstar": 1.0
+    }
+  },
+  "modelo": {
+    "familia": "RP3β",
+    "hiperparametros": {
+      "alpha": 0.5,
+      "beta": 0.15,
+      "k": 50
+    },
+    "regra": "maior cobertura entre as configurações não inferiores a c* na validação (margem 0.005)",
+    "usuarios": 24124,
+    "jogos": 3292,
+    "interacoes": 51692,
+    "segundos_ajuste": 0.3400425390000237,
+    "ms_por_usuario_top10": 0.26111407300049905,
+    "nnz_pesos": 47400
+  },
+  "versoes": {
+    "python": "3.13.17",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "scipy": "1.18.1"
+  },
+  "hash_dados": "49959f4c10de06ec090133e36024d00463f3d9f8ab8e2b624e827a7e5fc93f6c",
+  "tempo_final_s": 763.0948188949997
+}

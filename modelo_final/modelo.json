@@ -1,0 +1,15 @@
+{
+  "familia": "RP3β",
+  "hiperparametros": {
+    "alpha": 0.5,
+    "beta": 0.15,
+    "k": 50
+  },
+  "regra": "maior cobertura entre as configurações não inferiores a c* na validação (margem 0.005)",
+  "usuarios": 24124,
+  "jogos": 3292,
+  "interacoes": 51692,
+  "segundos_ajuste": 0.3400425390000237,
+  "ms_por_usuario_top10": 0.26111407300049905,
+  "nnz_pesos": 47400
+}

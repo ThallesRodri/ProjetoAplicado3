@@ -1,0 +1,39 @@
+auditoria {'linhas_brutas': 59305, 'usuarios_brutos': 25458, 'itens_brutos': 3682, 'ausentes': {'user': 0, 'item': 0, 'positive': 0}, 'duplicatas': 874, 'conflitos': 0, 'unicas': 58431, 'positivas': 51692, 'negativas': 6739}
+  [A-s42] ItemKNN: melhor val NDCG=0.11968
+  [A-s42] RP3β: melhor val NDCG=0.12784
+  [A-s42] EASE: melhor val NDCG=0.12643
+  [A-s42] iALS: melhor val NDCG=0.12873
+  [A-s42] concluído em 506s
+  [A-s7] ItemKNN: melhor val NDCG=0.11664
+  [A-s7] RP3β: melhor val NDCG=0.12661
+  [A-s7] EASE: melhor val NDCG=0.12570
+  [A-s7] iALS: melhor val NDCG=0.12616
+  [A-s7] concluído em 496s
+  [A-s13] ItemKNN: melhor val NDCG=0.12299
+  [A-s13] RP3β: melhor val NDCG=0.13317
+  [A-s13] EASE: melhor val NDCG=0.13385
+  [A-s13] iALS: melhor val NDCG=0.13314
+  [A-s13] concluído em 480s
+  [A-s2024] ItemKNN: melhor val NDCG=0.11534
+  [A-s2024] RP3β: melhor val NDCG=0.12198
+  [A-s2024] EASE: melhor val NDCG=0.12277
+  [A-s2024] iALS: melhor val NDCG=0.11972
+  [A-s2024] concluído em 469s
+  [A-s2026] ItemKNN: melhor val NDCG=0.12399
+  [A-s2026] RP3β: melhor val NDCG=0.13094
+  [A-s2026] EASE: melhor val NDCG=0.13069
+  [A-s2026] iALS: melhor val NDCG=0.13092
+  [A-s2026] concluído em 488s
+  [B-com-inferencia] ItemKNN: melhor val NDCG=0.08210
+  [B-com-inferencia] RP3β: melhor val NDCG=0.09481
+  [B-com-inferencia] EASE: melhor val NDCG=0.09181
+  [B-com-inferencia] iALS: melhor val NDCG=0.09671
+  [B-com-inferencia] concluído em 416s
+B-com-inferencia {'cortes': {'t_val': '2015-11-19', 't_teste': '2016-03-21'}, 'treino': 41349, 'validacao': 5164, 'teste': 5179, 'itens_teste_ausentes_hist': 1085}
+  [B-somente-datados] ItemKNN: melhor val NDCG=0.09828
+  [B-somente-datados] RP3β: melhor val NDCG=0.11370
+  [B-somente-datados] EASE: melhor val NDCG=0.10985
+  [B-somente-datados] iALS: melhor val NDCG=0.11538
+  [B-somente-datados] concluído em 440s
+B-somente-datados {'cortes': {'t_val': '2015-06-08', 't_teste': '2015-09-23'}, 'treino': 34812, 'validacao': 4366, 'teste': 4379, 'itens_teste_ausentes_hist': 894}
+fim 3300.5186748909996
